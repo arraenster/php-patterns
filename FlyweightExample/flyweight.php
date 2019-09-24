@@ -17,16 +17,16 @@ spl_autoload_register(function($className) {
 echo 'Flyweight example<br>';
 
 
-$sharedFactory = new SharedHostRegistry();
+$sharedRegistry = new SharedHostRegistry();
 
-$fly1 = new WebHost($sharedFactory, 'web10', '10.0.1.10', 4, 100);
+$fly1 = new WebHost($sharedRegistry, 'web10', '10.0.1.10', 4, 100);
 print_r($fly1->getMountedFiles());
 echo '<hr>';
 
-$fly2 = new WebHost($sharedFactory, 'web21', '10.0.1.15', 4, 100);
+$fly2 = new WebHost($sharedRegistry, 'web21', '10.0.1.15', 4, 100);
 print_r($fly2->getMountedFiles());
 echo '<hr>';
 
-$fly3 = new WebHost($sharedFactory, 'web25', '10.0.1.145', 5, 120);
+$fly3 = new WebHost($sharedRegistry, 'web25', '10.0.1.145', 5, 120);
 print_r($fly3->getMountedFiles());
 echo '<br>';

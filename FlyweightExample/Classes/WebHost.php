@@ -33,7 +33,7 @@ class WebHost {
     protected $_sharedWebHost;
 
     function __construct(
-        SharedHostRegistryInterface $_sharedFactory,
+        SharedHostRegistryInterface $_sharedRegistry,
         $_alias = '',
         $_ip = '127.0.0.1',
         $_cpuCount = 0,
@@ -47,7 +47,7 @@ class WebHost {
         $this->_cpuCount = $_cpuCount;
         $this->_storageSize = $_storageSize;
 
-        $this->_sharedWebHost = $_sharedFactory->getNewSharedHost($this->_alias);
+        $this->_sharedWebHost = $_sharedRegistry->getNewSharedHost($this->_alias);
     }
 
     /**
