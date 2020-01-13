@@ -1,0 +1,13 @@
+parameters:
+    corporate_routes:
+        ACL:
+            icon: 'address-book' #https://mdbootstrap.com/docs/react/content/icons-list/
+            routes:
+                GroupsManager:
+                    name: 'Groups Manager'
+                    route: '/corporate/groupsManager'
+                    roles: ['role_admin_finance', 'role_admin']
+                UserManager:
+                    name: 'User Manager'
+                    route: '/corporate/acl/userManager'
+                    roles: ['role_admin_finance', 'role_admin']

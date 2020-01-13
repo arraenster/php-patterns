@@ -1,0 +1,14 @@
+lexik_jwt_authentication:
+    secret_key: '%env(resolve:JWT_SECRET_KEY)%'
+    user_identity_field: 'userName'
+    token_ttl: 432000 #5 days
+    token_extractors:
+        authorization_header:
+            enabled: true
+            name: 'JWT-TOKEN'
+            prefix: ''
+        cookie:
+            enabled: true
+            name: 'jwt_token'
+    encoder:
+        signature_algorithm: HS256

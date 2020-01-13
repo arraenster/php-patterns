@@ -1,0 +1,89 @@
+version: '3'
+services:
+    code:
+        image: busybox
+        command: /bin/true
+        container_name: secure_code
+        networks:
+            - secure
+
+    php-fpm:
+        build: ./docker/php-fpm
+        container_name: secure_php-fpm
+        volumes:
+            - ./:/var/www
+            - ~/.composer:/root/.composer
+            - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+            - ./docker/logs/app:/var/log/default
+        links:
+            - mariadb
+            - redis
+        networks:
+            - secure
+
+    nginx:
+        build: ./docker/nginx
+        container_name: secure_nginx
+        ports:
+            - 1337:80
+            - 443:443
+        links:
+            - php-fpm
+        volumes:
+            - ./:/var/www
+            - ./docker/logs/nginx:/var/log/nginx
+        networks:
+          - secure
+
+    mariadb:
+        build: ./docker/mariadb
+        container_name: secure_mariadb
+        ports:
+            - 3307:3306
+        volumes:
+            - secure_mariadb:/var/lib/mysql
+            - ./docker/logs/mysql:/var/log/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: secure
+        command:
+            'mysqld --innodb-flush-method=fsync'
+        networks:
+            - secure
+
+    rabbitmq:
+        build: ./docker/rabbitmq
+        container_name: secure_rabbitmq
+        environment:
+            RABBITMQ_DEFAULT_USER: guest
+            RABBITMQ_DEFAULT_PASS: guest
+        ports:
+            - 15672:15672
+        networks:
+          - secure
+
+    redis:
+        build: ./docker/redis
+        container_name: secure_redis_cache
+        ports:
+            - 6379:6379
+        networks:
+          - secure
+
+    redismonitor:
+        build: ./docker/redismonitor
+        container_name: secure_redis_monitor
+        command: --server redis
+        links:
+            - redis
+        ports:
+            - 63790:63790
+        networks:
+          - secure
+
+volumes:
+    secure_mariadb:
+
+networks:
+  secure:
+    driver: bridge

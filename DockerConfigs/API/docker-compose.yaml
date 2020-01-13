@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  code:
+    image: busybox
+    command: /bin/true
+    container_name: omegaapi-code
+    networks:
+      - omegasecure_secure
+
+  nginx:
+    build: ./docker/nginx
+    container_name: omegaapi-nginx
+    ports:
+      - "1336:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/logs/nginx:/var/log/nginx
+    links:
+      - php
+    networks:
+      - omegasecure_secure
+
+  php:
+    build: ./docker/php
+    container_name: omegaapi-php
+    volumes:
+      - ./:/var/www
+      - ./docker/logs/php:/var/log/php
+    networks:
+      - omegasecure_secure
+
+  mariadb:
+    build: ./docker/mariadb
+    container_name: omegaapi-mariadb
+    ports:
+      - 3306:3306
+    volumes:
+      - omegaapi-mariadb:/var/lib/mysql
+      - ./docker/logs/mysql:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: omegaapi
+    command:
+      'mysqld --innodb-flush-method=fsync'
+    networks:
+      - omegasecure_secure
+
+volumes:
+  omegaapi-mariadb:
+
+networks:
+  omegasecure_secure:
+    external: true

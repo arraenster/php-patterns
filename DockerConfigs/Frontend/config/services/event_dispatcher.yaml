@@ -1,0 +1,10 @@
+services:
+    #EventDispatcher
+    #Registered it here because of possibility using it anywhere, even without autowire: true
+    gamepoint_event_dispatcher:
+        class: GamePoint\Service\EventDispatcher\EventDispatcher
+        public: true
+        arguments:
+            - '@gamepoint_messagebus'
+            - '@serializer'
+            -  GamePoint\Application\Message\Factory\MessageTopicFactory

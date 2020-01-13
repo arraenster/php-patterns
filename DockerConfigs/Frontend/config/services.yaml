@@ -1,0 +1,60 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+imports:
+    # Event Dispatcher
+    - { resource: services/event_dispatcher.yaml }
+
+parameters:
+    locale: 'en'
+    pagination.default_page_number: 1
+    pagination.default_items_per_page: 50
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+        bind:
+            Symfony\Component\Messenger\MessageBusInterface: '@gamepoint_messagebus'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    GamePoint\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    GamePoint\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    gamepoint_messagebus:
+        class: GamePoint\Infrastructure\Messenger\MessageWithTopicAwareMessageBus
+        arguments:
+            - '@service_container'
+            - '@message_bus'
+
+    # Tag all Transformers for transforming a Form Type to JSON
+    _instanceof:
+        GamePoint\Form\Transformer\TransformerInterface:
+            tags: ['liform.extension']
+
+    liform.transformer.file:
+        class: GamePoint\Form\Transformer\FileUploadTransformer
+        tags:
+            - { name: liform.transformer, form_type: file }
+
+    GamePoint\Security\RedisJwtKeyStorage:
+        arguments:
+            $environmentType: '%env(APP_ENV)%'
+            $recordTtl: '%lexik_jwt_authentication.token_ttl%'
+
+    Curl\Curl:
+        autowire: true

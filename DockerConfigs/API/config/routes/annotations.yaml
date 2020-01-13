@@ -1,0 +1,17 @@
+controllers_default_v1:
+  resource: ../../src/Controller/V1
+  type: annotation
+  condition: "request.headers.get('X-Accept-Version') == 'v1' || !request.headers.get('X-Accept-Version')"
+
+controllers_corporate_user:
+  resource: ../../src/CorporateUser/API/
+  type: annotation
+
+controllers_siterules:
+  resource: ../../src/SiteRule/API/
+  type: annotation
+
+controllers_player:
+  resource: ../../src/Player/API/
+  type: annotation
+

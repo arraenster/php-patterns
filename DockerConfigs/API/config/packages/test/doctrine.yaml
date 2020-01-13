@@ -1,0 +1,54 @@
+doctrine:
+  dbal:
+    default_connection: default
+    connections:
+      default:
+        url: '%env(resolve:DATABASE_TEST_URL)%'
+        driver_class: GamePoint\DoctrineOverride\OverriddenDriver
+        server_version: '5.7'
+        charset: utf8mb4
+        mapping_types:
+          enum: string
+  orm:
+    default_entity_manager: default
+    entity_managers:
+      default:
+        connection: default
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        mappings:
+          #DomainName:
+          #is_bundle: false
+          #type: annotation
+          #dir: '%kernel.project_dir%/src/DomainDirToEnities'
+          #prefix: 'DomainNamespacePrefix'
+          #alias: DomainAlias
+          SiteRule:
+            is_bundle: false
+            type: annotation
+            dir: '%kernel.project_dir%/src/SiteRule/Domain'
+            prefix: 'GamePoint\SiteRule\Domain'
+            alias: SiteRule
+          CorporateUser:
+            is_bundle: false
+            type: annotation
+            dir: '%kernel.project_dir%/src/CorporateUser/Domain'
+            prefix: 'GamePoint\CorporateUser\Domain'
+            alias: CorporateUser
+          Player:
+            is_bundle: false
+            type: annotation
+            dir: '%kernel.project_dir%/src/Player/Domain/Main'
+            prefix: 'GamePoint\Player\Domain\Main'
+            alias: Player
+          Bank:
+            is_bundle: false
+            type: annotation
+            dir: '%kernel.project_dir%/src/Player/Domain/Bank'
+            prefix: 'GamePoint\Player\Domain\Bank'
+            alias: Bank
+          Game:
+            is_bundle: false
+            type: annotation
+            dir: '%kernel.project_dir%/src/Game/Domain'
+            prefix: 'GamePoint\Game\Domain'
+            alias: Game

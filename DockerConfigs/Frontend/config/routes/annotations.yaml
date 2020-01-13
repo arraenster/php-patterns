@@ -1,0 +1,31 @@
+controllers_dashboard:
+    resource: ../../src/Controller/Corporate/DashboardController.php
+    type: annotation
+    prefix:
+            en: '/en'
+            nl: '/nl'
+
+controllers_security:
+    resource: ../../src/Controller/SecurityController.php
+    type: annotation
+
+app_logout:
+    path: /logout
+    methods: GET
+
+controllers_corporate_pages:
+    resource: ../../src/Controller/Corporate
+    type: annotation
+    defaults:
+        _format: html
+    requirements:
+        _format: html|json
+
+# fallback redirect to default language (en) needed because we prefix all routes with a language.
+home_fallback:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /en
+        permanent: true
+

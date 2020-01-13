@@ -1,0 +1,6 @@
+parameters:
+        onurb_yuml.extension: png # Extensions allowed : jpg, png (default), svg, pdf, or json
+        onurb_yuml.style: plain # Styles allowed : plain (default), boring or scruffy
+        onurb_yuml.direction: TB # Directions allowed : LR (left to Right), RL (Right to Left), TB (Top to bottom => default).
+        onurb_yuml.scale: normal # Scales allowed : huge, big, normal (default), small or tiny.
+        onurb_yuml.show_fields_description: true # default is true

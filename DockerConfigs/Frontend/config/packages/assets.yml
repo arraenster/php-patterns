@@ -1,0 +1,7 @@
+framework:
+    assets:
+        packages:
+            site:
+                json_manifest_path: '%kernel.project_dir%/public/build/site/manifest.json'
+            corporate:
+                json_manifest_path: '%kernel.project_dir%/public/build/corporate/manifest.json'

@@ -1,0 +1,12 @@
+a2lix_translation_form:
+    locale_provider: default       # [1]
+    locales: [en, fr]              # [1-a]
+    default_locale: en             # [1-b]
+    #required_locales: [fr]        # [1-c]
+    templating: "@A2lixTranslationForm/default.html.twig"      # [2]
+
+#[1] Custom locale provider service id. Default one relies on [1-*] values:
+#[1-a] List of translations locales to display
+#[1-b] Default locale
+#[1-c] List of required translations locales
+#[2] The default template is Twitter Bootstrap compatible. You can redefine your own here

@@ -1,0 +1,1 @@
+FROM insready/redis-stat

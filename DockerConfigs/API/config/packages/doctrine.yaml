@@ -1,0 +1,118 @@
+doctrine:
+    dbal:
+        # configure these for your database server
+        default_connection: default
+        connections:
+            default:
+                url: '%env(resolve:DATABASE_URL)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
+            main:
+                mapping_types:
+                    enum: string
+                    bit: string
+                url: '%env(resolve:DATABASE_MAIN_URL_MASTER)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
+                slaves:
+                    slave1:
+                        url: '%env(resolve:DATABASE_MAIN_URL_SLAVE0)%'
+                    slave2:
+                        url: '%env(resolve:DATABASE_MAIN_URL_SLAVE1)%'
+                    slave3:
+                        url: '%env(resolve:DATABASE_MAIN_URL_SLAVE2)%'
+                    slave4:
+                        url: '%env(resolve:DATABASE_MAIN_URL_SLAVE3)%'
+                    slave5:
+                        url: '%env(resolve:DATABASE_MAIN_URL_SLAVE4)%'
+            global:
+                url: '%env(resolve:DATABASE_GLOBAL_URL_MASTER)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
+                slaves:
+                    slave1:
+                        url: '%env(resolve:DATABASE_GLOBAL_URL_SLAVE0)%'
+                    slave2:
+                        url: '%env(resolve:DATABASE_GLOBAL_URL_SLAVE1)%'
+                    slave3:
+                        url: '%env(resolve:DATABASE_GLOBAL_URL_SLAVE2)%'
+                    slave4:
+                        url: '%env(resolve:DATABASE_GLOBAL_URL_SLAVE3)%'
+                    slave5:
+                        url: '%env(resolve:DATABASE_GLOBAL_URL_SLAVE4)%'
+            bank:
+                url: '%env(resolve:DATABASE_BANK_URL_MAIN)%'
+                driver: 'pdo_mysql'
+                server_version: '5.7'
+                charset: utf8mb4
+                slaves:
+                    slave1:
+                        url: '%env(resolve:DATABASE_BANK_URL_SLAVE0)%'
+                    slave2:
+                        url: '%env(resolve:DATABASE_BANK_URL_SLAVE1)%'
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    #DomainName:
+                    #     is_bundle: false
+                    #     type: annotation
+                    #     dir: '%kernel.project_dir%/src/DomainDirToEnities'
+                    #     prefix: 'DomainNamespacePrefix'
+                    #     alias: DomainAlias
+                    # Use these settings for the maker bundle
+                    # The maker bundle isn't smart enough to be able to work without the entity dir
+                    # Base:
+                    #     is_bundle: false
+                    #     type: annotation
+                    #     dir: '%kernel.project_dir%/src/Entity'
+                    #     prefix: 'GamePoint\Entity'
+                    #     alias: Entity
+                    SiteRule:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/SiteRule/Domain'
+                        prefix: 'GamePoint\SiteRule\Domain'
+                        alias: SiteRule
+            main:
+                connection: main
+                mappings:
+                    Player:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Player/Domain/Main'
+                        prefix: 'GamePoint\Player\Domain\Main'
+                        alias: Player
+                    Game:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Game/Domain'
+                        prefix: 'GamePoint\Game\Domain'
+                        alias: Game
+            global:
+                connection: global
+                mappings:
+                    CorporateUser:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/CorporateUser/Domain'
+                        prefix: 'GamePoint\CorporateUser\Domain'
+                        alias: CorporateUser
+            bank:
+                connection: bank
+                mappings:
+                    Bank:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Player/Domain/Bank'
+                        prefix: 'GamePoint\Player\Domain\Bank'
+                        alias: Bank
+
+
+
+

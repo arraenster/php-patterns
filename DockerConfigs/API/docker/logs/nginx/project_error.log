@@ -1,0 +1,142 @@
+2019/09/09 12:35:16 [error] 6#6: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  During class fetch: Uncaught ReflectionException: Class Symfony\Component\Form\AbstractTypeExtension not found in /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:150
+Stack trace:
+#0 [internal function]: Symfony\Component\Config\Resource\ClassExistenceResource::throwOnRequiredClass('Symfony\\Compone...')
+#1 /var/www/vendor/nelmio/api-doc-bundle/Form/Extension/DocumentationExtension.php(22): spl_autoload_call('Symfony\\Compone...')
+#2 /var/www/vendor/symfony/debug/DebugClassLoader.php(159): include('/var/www/vendor...')
+#3 [internal function]: Symfony\Component\Debug\DebugClassLoader->loadClass('Nelmio\\ApiDocBu...')
+#4 [internal function]: spl_autoload_call('Nelmio\\ApiDocBu...')
+#5 /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php(78): class_exists('Nelmio\\ApiDocBu...')
+#6 /var/www/vendor/symfony/dependency-injection/ContainerBuilder.php(353): Symfony\Component\Config\Resource\ClassExistenceResource->isFresh(0)
+#7 /var/www/vendor/symfony/...
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP   2. GamePoint\Kernel->handle() /var/www/public/index.php:27
+PHP message: PHP   3. GamePoint\Kernel->boot() /var/www/vendor/symfony/http-kernel/Kernel.php:193
+PHP message: PHP   4. GamePoint\Kernel->initializeContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:133
+PHP message: PHP   5. GamePoint\Kernel->dumpContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:572
+PHP message: PHP   6. Symfony\Component\DependencyInjection\Dumper\PhpDumper->dump() /var/www/vendor/symfony/http-kernel/Kernel.php:741
+PHP message: PHP   7. Symfony\Component\DependencyInjection\Dumper\PhpDumper->addServices() /var/www/vendor/symfony/dependency-injection/Dumper/PhpDumper.php:221
+PHP message: PHP   8. Symfony\Component\DependencyInjection\Dumper\PhpDumper->addService() /var/www/vendor/symfony/dependency-injection/Dumper/PhpDumper.php:880
+PHP message: PHP  
+2019/09/09 12:35:16 [error] 6#6: *1 FastCGI sent in stderr: "ny/dependency-injection/ContainerBuilder.php:353
+PHP message: PHP  21. class_exists() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  22. spl_autoload_call() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  23. Symfony\Component\Debug\DebugClassLoader->loadClass() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  24. include() /var/www/vendor/symfony/debug/DebugClassLoader.php:159" while reading response header from upstream, client: 172.18.0.1, server: localhost, request: "GET /ping?asdasd=1&aaaaaaaaaaa HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "symfony-test.local"
+2019/09/09 12:35:18 [error] 6#6: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  During class fetch: Uncaught ReflectionException: Class Symfony\Component\Form\AbstractTypeExtension not found in /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:150
+Stack trace:
+#0 [internal function]: Symfony\Component\Config\Resource\ClassExistenceResource::throwOnRequiredClass('Symfony\\Compone...')
+#1 /var/www/vendor/nelmio/api-doc-bundle/Form/Extension/DocumentationExtension.php(22): spl_autoload_call('Symfony\\Compone...')
+#2 /var/www/vendor/symfony/debug/DebugClassLoader.php(156): include('/var/www/vendor...')
+#3 [internal function]: Symfony\Component\Debug\DebugClassLoader->loadClass('Nelmio\\ApiDocBu...')
+#4 [internal function]: spl_autoload_call('Nelmio\\ApiDocBu...')
+#5 /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php(78): class_exists('Nelmio\\ApiDocBu...')
+#6 /var/www/vendor/symfony/dependency-injection/ContainerBuilder.php(353): Symfony\Component\Config\Resource\ClassExistenceResource->isFresh(0)
+#7 /var/www/vendor/symfony/...
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP   2. GamePoint\Kernel->handle() /var/www/public/index.php:27
+PHP message: PHP   3. GamePoint\Kernel->boot() /var/www/vendor/symfony/http-kernel/Kernel.php:193
+PHP message: PHP   4. GamePoint\Kernel->initializeContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:133
+PHP message: PHP   5. GamePoint\Kernel->dumpContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:572
+PHP message: PHP   6. Symfony\Component\DependencyInjection\Dumper\PhpDumper->dump() /var/www/vendor/symfony/http-kernel/Kernel.php:741
+PHP message: PHP   7. Symfony\Component\DependencyInjection\Dumper\PhpDumper->addServices() /var/www/vendor/symfony/dependency-injection/Dumper/PhpDumper.php:221
+PHP message: PHP   8. Symfony\Component\DependencyInjection\Dumper\PhpDumper->addService() /var/www/vendor/symfony/dependency-injection/Dumper/PhpDumper.php:880
+PHP message: PHP  
+2019/09/09 12:35:18 [error] 6#6: *1 FastCGI sent in stderr: "ny/dependency-injection/ContainerBuilder.php:353
+PHP message: PHP  21. class_exists() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  22. spl_autoload_call() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  23. Symfony\Component\Debug\DebugClassLoader->loadClass() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  24. include() /var/www/vendor/symfony/debug/DebugClassLoader.php:156" while reading response header from upstream, client: 172.18.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "symfony-test.local", referrer: "http://symfony-test.local/ping?asdasd=1&aaaaaaaaaaa"
+2019/09/11 08:48:50 [error] 6#6: *214 FastCGI sent in stderr: "PHP message: PHP Fatal error:  During class fetch: Uncaught ReflectionException: Class GamePoint\Controller\DefaultController not found in /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:150
+Stack trace:
+#0 [internal function]: Symfony\Component\Config\Resource\ClassExistenceResource::throwOnRequiredClass('GamePoint\\Contr...')
+#1 /var/www/src/CorporateUser/Infrastructure/Controller/UserController.php(16): spl_autoload_call('GamePoint\\Contr...')
+#2 /var/www/vendor/symfony/debug/DebugClassLoader.php(159): include('/var/www/src/Co...')
+#3 [internal function]: Symfony\Component\Debug\DebugClassLoader->loadClass('GamePoint\\Corpo...')
+#4 [internal function]: spl_autoload_call('GamePoint\\Corpo...')
+#5 /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php(78): class_exists('GamePoint\\Corpo...')
+#6 /var/www/vendor/symfony/dependency-injection/ContainerBuilder.php(353): Symfony\Component\Config\Resource\ClassExistenceResource->isFresh(0)
+#7 /var/www/vendor/symfony/dependency-inj...
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP   2. GamePoint\Kernel->handle() /var/www/public/index.php:27
+PHP message: PHP   3. GamePoint\Kernel->boot() /var/www/vendor/symfony/http-kernel/Kernel.php:193
+PHP message: PHP   4. GamePoint\Kernel->initializeContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:133
+PHP message: PHP   5. GamePoint\Kernel->buildContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:550
+PHP message: PHP   6. GamePoint\Kernel->registerContainerConfiguration() /var/www/vendor/symfony/http-kernel/Kernel.php:659
+PHP message: PHP   7. Symfony\Component\Config\Loader\DelegatingLoader->load() /var/www/vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php:78
+PHP message: PHP   8. Symfony\Component\DependencyInjection\Loader\ClosureLoader->load() /var/www/vendor/symfony/config/Loader/DelegatingLoader.php:40
+PHP message: PHP   9. GamePoint\Kernel->Symfony\
+2019/09/11 08:48:50 [error] 6#6: *214 FastCGI sent in stderr: "() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  23. spl_autoload_call() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  24. Symfony\Component\Debug\DebugClassLoader->loadClass() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  25. include() /var/www/vendor/symfony/debug/DebugClassLoader.php:159" while reading response header from upstream, client: 172.18.0.1, server: localhost, request: "GET /ping?asdasd=1 HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "symfony-test.local"
+2019/09/11 08:49:02 [error] 6#6: *216 FastCGI sent in stderr: "PHP message: PHP Fatal error:  During class fetch: Uncaught ReflectionException: Class GamePoint\Controller\DefaultController not found in /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:150
+Stack trace:
+#0 [internal function]: Symfony\Component\Config\Resource\ClassExistenceResource::throwOnRequiredClass('GamePoint\\Contr...')
+#1 /var/www/src/CorporateUser/Infrastructure/Controller/UserController.php(16): spl_autoload_call('GamePoint\\Contr...')
+#2 /var/www/vendor/symfony/debug/DebugClassLoader.php(156): include('/var/www/src/Co...')
+#3 [internal function]: Symfony\Component\Debug\DebugClassLoader->loadClass('GamePoint\\Corpo...')
+#4 [internal function]: spl_autoload_call('GamePoint\\Corpo...')
+#5 /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php(78): class_exists('GamePoint\\Corpo...')
+#6 /var/www/vendor/symfony/dependency-injection/ContainerBuilder.php(353): Symfony\Component\Config\Resource\ClassExistenceResource->isFresh(0)
+#7 /var/www/vendor/symfony/dependency-inj...
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP   2. GamePoint\Kernel->handle() /var/www/public/index.php:27
+PHP message: PHP   3. GamePoint\Kernel->boot() /var/www/vendor/symfony/http-kernel/Kernel.php:193
+PHP message: PHP   4. GamePoint\Kernel->initializeContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:133
+PHP message: PHP   5. GamePoint\Kernel->buildContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:550
+PHP message: PHP   6. GamePoint\Kernel->registerContainerConfiguration() /var/www/vendor/symfony/http-kernel/Kernel.php:659
+PHP message: PHP   7. Symfony\Component\Config\Loader\DelegatingLoader->load() /var/www/vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php:78
+PHP message: PHP   8. Symfony\Component\DependencyInjection\Loader\ClosureLoader->load() /var/www/vendor/symfony/config/Loader/DelegatingLoader.php:40
+PHP message: PHP   9. GamePoint\Kernel->Symfony\
+2019/09/11 08:49:02 [error] 6#6: *216 FastCGI sent in stderr: "() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  23. spl_autoload_call() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  24. Symfony\Component\Debug\DebugClassLoader->loadClass() /var/www/vendor/symfony/config/Resource/ClassExistenceResource.php:78
+PHP message: PHP  25. include() /var/www/vendor/symfony/debug/DebugClassLoader.php:156" while reading response header from upstream, client: 172.18.0.1, server: localhost, request: "GET /ping?asdasd=1&version=v2 HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "symfony-test.local"
+2019/12/06 07:53:05 [error] 6#6: *75 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare GamePoint\Player\Domain\Player\Guser::$nieuwsbrief in /var/www/src/Player/Domain/Player/Guser.php on line 131
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP   2. GamePoint\Kernel->handle() /var/www/public/index.php:27
+PHP message: PHP   3. GamePoint\Kernel->boot() /var/www/vendor/symfony/http-kernel/Kernel.php:193
+PHP message: PHP   4. GamePoint\Kernel->initializeContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:133
+PHP message: PHP   5. Symfony\Component\Config\ConfigCache->isFresh() /var/www/vendor/symfony/http-kernel/Kernel.php:491
+PHP message: PHP   6. Symfony\Component\Config\ConfigCache->isFresh() /var/www/vendor/symfony/config/ConfigCache.php:60
+PHP message: PHP   7. Symfony\Component\Config\Resource\SelfCheckingResourceChecker->isFresh() /var/www/vendor/symfony/config/ResourceCheckerConfigCache.php:99
+PHP message: PHP   8. Symfony\Component\Config\Resource\ReflectionClassResource->isFresh() /var/www/vendor/symfony/config/Resource/SelfCheckingResourceChecker.php:34
+PHP message: PHP   9. Symfony\Component\Config\Resource\ReflectionClassResource->computeHash() /var/www/vendor/symfony/config/Resource/ReflectionClassResource.php:52
+PHP message: PHP  10. ReflectionClass->__construct() /var/www/vendor/symfony/config/Resource/ReflectionClassResource.php:105
+PHP message: PHP  11. spl_autoload_call() /var/www/vendor/symfony/config/Resource/ReflectionClassResource.php:105
+PHP message: PHP  12. Symfony\Component\Debug\DebugClassLoader->loadClass() /var/www/vendor/symfony/config/Resource/ReflectionClassResource.php:105" while reading response header from upstream, client: 172.22.0.1, server: localhost, request: "GET /players HTTP/1.1", upstream: "fastcgi://172.22.0.10:9000", host: "symfony-test.local:1336"
+2019/12/16 08:56:09 [error] 6#6: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class GamePoint\Player\Infrastructure\PlayerRepository contains 2 abstract methods and must therefore be declared abstract or implement the remaining methods (GamePoint\Player\Infrastructure\PlayerRepositoryInterface::getProfileByPlayerId, GamePoint\Player\Infrastructure\PlayerRepositoryInterface::getProfileByPlayerName) in /var/www/src/Player/Infrastructure/PlayerRepository.php on line 19
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP   2. GamePoint\Kernel->handle() /var/www/public/index.php:27
+PHP message: PHP   3. GamePoint\Kernel->boot() /var/www/vendor/symfony/http-kernel/Kernel.php:193
+PHP message: PHP   4. GamePoint\Kernel->initializeContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:133
+PHP message: PHP   5. GamePoint\Kernel->buildContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:555
+PHP message: PHP   6. GamePoint\Kernel->registerContainerConfiguration() /var/www/vendor/symfony/http-kernel/Kernel.php:664
+PHP message: PHP   7. Symfony\Component\Config\Loader\DelegatingLoader->load() /var/www/vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php:78
+PHP message: PHP   8. Symfony\Component\DependencyInjection\Loader\ClosureLoader->load() /var/www/vendor/symfony/config/Loader/DelegatingLoader.php:40
+PHP message: PHP   9. GamePoint\Kernel->Symfony\Bundle\FrameworkBundle\Kernel\{closure:/var/www/vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php:59-78}() /var/www/vendor/symfony/dependency-injection/Loader/ClosureLoader.php:38
+PHP message: PHP  10. GamePoint\Kernel->configureContainer() /var/www/vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php:75
+PHP message: PHP  11. Symfony\Component\Config\Loader\DelegatingLoader->load() /var/www/src/Kernel.php:41
+PHP message: PHP  12. Symfony\Component\DependencyInjection\Loader\GlobFileLoader->load() /var/www/vendor/symfony/config/Loader/DelegatingLoader.php:40
+PHP message: PHP  13.
+2019/12/16 09:20:15 [error] 6#6: *15 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Class GamePoint\Player\Infrastructure\PlayerRepository contains 2 abstract methods and must therefore be declared abstract or implement the remaining methods (GamePoint\Player\Infrastructure\PlayerRepositoryInterface::getProfileByPlayerId, GamePoint\Player\Infrastructure\PlayerRepositoryInterface::getProfileByPlayerName) in /var/www/src/Player/Infrastructure/PlayerRepository.php on line 19
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP   2. GamePoint\Kernel->handle() /var/www/public/index.php:27
+PHP message: PHP   3. GamePoint\Kernel->boot() /var/www/vendor/symfony/http-kernel/Kernel.php:193
+PHP message: PHP   4. GamePoint\Kernel->initializeContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:133
+PHP message: PHP   5. GamePoint\Kernel->buildContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:555
+PHP message: PHP   6. GamePoint\Kernel->registerContainerConfiguration() /var/www/vendor/symfony/http-kernel/Kernel.php:664
+PHP message: PHP   7. Symfony\Component\Config\Loader\DelegatingLoader->load() /var/www/vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php:78
+PHP message: PHP   8. Symfony\Component\DependencyInjection\Loader\ClosureLoader->load() /var/www/vendor/symfony/config/Loader/DelegatingLoader.php:40
+PHP message: PHP   9. GamePoint\Kernel->Symfony\Bundle\FrameworkBundle\Kernel\{closure:/var/www/vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php:59-78}() /var/www/vendor/symfony/dependency-injection/Loader/ClosureLoader.php:38
+PHP message: PHP  10. GamePoint\Kernel->configureContainer() /var/www/vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php:75
+PHP message: PHP  11. Symfony\Component\Config\Loader\DelegatingLoader->load() /var/www/src/Kernel.php:41
+PHP message: PHP  12. Symfony\Component\DependencyInjection\Loader\GlobFileLoader->load() /var/www/vendor/symfony/config/Loader/DelegatingLoader.php:40
+PHP message: PHP  13

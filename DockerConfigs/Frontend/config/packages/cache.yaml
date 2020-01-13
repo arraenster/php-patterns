@@ -1,0 +1,20 @@
+# https://symfony.com/doc/current/cache.html#cache-configuration-with-frameworkbundle
+#
+# Defaults
+# Default are cache.app and cache.system needs to be set
+#   app: cache.adapter.filesystem
+#   system: cache.adapter.system
+#
+# Cache adapters
+# We currently use only Redis but more adapters are already available.
+# cache.adapter.redis
+# cache.adapter.memcached
+# cache.adapter.filesystem
+#
+# Custom cache provider and cache pools are available.
+# check the link above for more options.
+framework:
+    cache:
+        default_redis_provider: '%env(REDIS_URL)%'
+        app: cache.adapter.filesystem
+        system: cache.adapter.system

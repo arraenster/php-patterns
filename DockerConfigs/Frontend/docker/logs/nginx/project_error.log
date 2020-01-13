@@ -1,0 +1,26 @@
+2019/07/31 13:11:07 [error] 9#9: *2 FastCGI sent in stderr: "PHP message: PHP Warning:  require(/var/www/public/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/public/index.php on line 8
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP Fatal error:  require(): Failed opening required '/var/www/public/../vendor/autoload.php' (include_path='.:/usr/local/lib/php') in /var/www/public/index.php on line 8
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0" while reading response header from upstream, client: 172.25.0.1, server: localhost, request: "GET /logout HTTP/1.1", upstream: "fastcgi://172.25.0.8:9000", host: "symfony-test.local", referrer: "http://symfony-test.local/corporate/acl/groupManager"
+2019/07/31 13:11:08 [error] 9#9: *2 FastCGI sent in stderr: "PHP message: PHP Warning:  require(/var/www/public/../vendor/autoload.php): failed to open stream: No such file or directory in /var/www/public/index.php on line 8
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP Fatal error:  require(): Failed opening required '/var/www/public/../vendor/autoload.php' (include_path='.:/usr/local/lib/php') in /var/www/public/index.php on line 8
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0" while reading response header from upstream, client: 172.25.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "fastcgi://172.25.0.8:9000", host: "symfony-test.local", referrer: "http://symfony-test.local/logout"
+2019/12/11 09:40:04 [error] 6#6: *2 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot use Symfony\Component\Security\Http\Authentication\AuthenticationUtils as AuthenticationUtils because the name is already in use in /var/www/src/Controller/SecurityController.php on line 13
+PHP message: PHP Stack trace:
+PHP message: PHP   1. {main}() /var/www/public/index.php:0
+PHP message: PHP   2. GamePoint\Kernel->handle() /var/www/public/index.php:39
+PHP message: PHP   3. GamePoint\Kernel->boot() /var/www/vendor/symfony/http-kernel/Kernel.php:193
+PHP message: PHP   4. GamePoint\Kernel->initializeContainer() /var/www/vendor/symfony/http-kernel/Kernel.php:133
+PHP message: PHP   5. Symfony\Component\Config\ConfigCache->isFresh() /var/www/vendor/symfony/http-kernel/Kernel.php:479
+PHP message: PHP   6. Symfony\Component\Config\ConfigCache->isFresh() /var/www/vendor/symfony/config/ConfigCache.php:60
+PHP message: PHP   7. Symfony\Component\Config\Resource\SelfCheckingResourceChecker->isFresh() /var/www/vendor/symfony/config/ResourceCheckerConfigCache.php:99
+PHP message: PHP   8. Symfony\Component\Config\Resource\ReflectionClassResource->isFresh() /var/www/vendor/symfony/config/Resource/SelfCheckingResourceChecker.php:34
+PHP message: PHP   9. Symfony\Component\Config\Resource\ReflectionClassResource->computeHash() /var/www/vendor/symfony/config/Resource/ReflectionClassResource.php:49
+PHP message: PHP  10. ReflectionClass->__construct() /var/www/vendor/symfony/config/Resource/ReflectionClassResource.php:110
+PHP message: PHP  11. spl_autoload_call() /var/www/vendor/symfony/config/Resource/ReflectionClassResource.php:110
+PHP message: PHP  12. Symfony\Component\Debug\DebugClassLoader->loadClass() /var/www/vendor/symfony/config/Resource/ReflectionClassResource.php:110" while reading response header from upstream, client: 172.22.0.1, server: localhost, request: "GET /corporate/playerManager HTTP/1.1", upstream: "fastcgi://172.22.0.11:9000", host: "localhost:1337", referrer: "http://localhost:1337/corporate/acl/userManager"

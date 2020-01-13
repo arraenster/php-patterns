@@ -1,0 +1,149 @@
+easy_admin:
+    translation_domain: 'admin'
+    site_name: 'GamePoint EasyAdmin'
+    list:
+        title: title.list
+    edit:
+        title: title.edit
+    new:
+        title: title.new
+    show:
+        title: title.show
+    formats:
+        date: 'd-m-Y'
+        time: 'H:i'
+        datetime: 'd-m-Y H:i:s'
+        number: '%d'
+    design:
+        menu:
+            - label: menu.game
+              icon: 'gamepad'
+              children: ['Game']
+            - label: menu.internationalization
+              icon: 'globe'
+              children: ['Country', 'Language', 'TimeZone']
+            - label: menu.player
+              icon: 'users'
+              entity: 'Player'
+            - label: menu.profile
+              icon: 'user-circle'
+              children:
+                  - label: menu.profile
+                    entity: 'Profile'
+                  - label: menu.address
+                    entity: 'ProfileAddress'
+                  - label: menu.avatar
+                    entity: 'ProfileAvatar'
+            - label: menu.membership
+              icon: 'shield'
+              children:
+                  - label: menu.membership
+                    entity: 'Membership'
+                  - label: menu.membership.type
+                    entity: 'MembershipType'
+            - label: menu.tracking
+              icon: 'search'
+              children:
+                  - label: menu.game.status
+                    entity: 'TrackingGameStatus'
+                  - label: menu.tracking
+                    entity: 'Tracking'
+
+    entities:
+        # List the entity class name you want to manage
+        # Please add in the same logic as the Entity dir
+        Game:
+            class: GamePoint\Entity\Game\Game
+            form:
+            #  - { property: 'translations', label: false, type: A2lix\TranslationFormBundle\Form\Type\TranslationsType }
+        Country:
+            class: GamePoint\Entity\Intl\Country\Country
+        Language:
+            class: GamePoint\Entity\Intl\Language\Language
+        TimeZone:
+            class: GamePoint\Entity\Intl\TimeZone\TimeZone
+        Membership:
+            class: GamePoint\Entity\User\Membership\Membership
+            form:
+                fields:
+                    - startDate
+                    - endDate
+                    - lifetime
+                    - type
+                    - guser
+        MembershipType:
+            class: GamePoint\Entity\User\Membership\Type
+            label: menu.membership.type
+            form:
+                fields:
+                    - name
+                    - memberships
+        ProfileAddress:
+            class: GamePoint\Entity\User\Profile\Address\Address
+            label: menu.address
+            form:
+                fields:
+                    - name
+                    - street
+                    - number
+                    - numberAddition
+                    - postalCode
+                    - city
+                    - state
+                    - profile
+                    - country
+        ProfileAvatar:
+            class: GamePoint\Entity\User\Profile\Avatar\Avatar
+            label: menu.avatar
+            list:
+                fields:
+                    - id
+                    - {property: 'fileName', type: 'image', base_path: 'https://www.gamepoint.com/avatarsv3/100x100/'}
+                    - banned
+            form:
+                fields:
+                    - fileName
+                    - banned
+        Profile:
+            class: GamePoint\Entity\User\Profile\Profile
+            form:
+                fields:
+                    - firstName
+                    - lastName
+                    - gender
+                    - dateOfBirth
+                    - language
+                    - avatar
+                    - timeZone
+                    - addresses
+
+        TrackingGameStatus:
+            class: GamePoint\Entity\User\Tracking\GameStatus
+            label: menu.game.status
+            form:
+                fields:
+                    - port
+                    - active
+                    - game
+                    - tracking
+        Tracking:
+            class: GamePoint\Entity\User\Tracking\Tracking
+            form:
+                fields:
+                    - isp
+                    - ip
+                    - browser
+                    - website
+                    - screenWidth
+        Player:
+            class: GamePoint\Entity\User\Player
+            list:
+                fields: ['id','userId', 'username', 'email', 'profile', 'tracking']
+            form:
+                fields:
+                    - userId
+                    - email
+                    - status
+                    - roles
+                    - profile
+                    - tracking

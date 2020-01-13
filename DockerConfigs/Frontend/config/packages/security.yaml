@@ -1,0 +1,45 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        jwt_provider:
+            lexik_jwt: ~
+        omega_api_user_provider:
+            id: GamePoint\Security\UserProvider
+    encoders:
+        GamePoint\Security\LegacyPasswordEncoder:
+            id: GamePoint\Security\LegacyPasswordEncoder
+    firewalls:
+        refresh:
+            pattern:  ^/api/token/refresh
+            stateless: true
+            anonymous: true
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        login:
+            pattern:  ^/(login|logout)
+            anonymous: true
+            stateless: true
+            provider: omega_api_user_provider
+            guard:
+                authenticators:
+                    - GamePoint\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+                success_handler: GamePoint\Security\LogoutSuccessHandler
+        jwt:
+            pattern:  ^/
+            stateless: true
+            provider: jwt_provider
+            guard:
+                authenticators:
+                    - GamePoint\Security\CorporateJwtAuthenticator
+
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/dashboard, roles: ROLE_USER }

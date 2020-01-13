@@ -1,0 +1,328 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            url: '%env(RABBITMQ_URL)%'
+            lazy: true
+            heartbeat: 900
+            read_write_timeout: 2000
+
+        session_shoveler:
+            url: '%env(RABBITMQ_URL)%'
+            lazy: true
+            heartbeat: 450
+            read_write_timeout: 1000
+
+    producers:
+        # use 'old_sound_rabbit_mq.task_producer' service to send data.
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractMessagebusMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: messagebus
+                type: topic
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractAckMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: ack
+                type: topic
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractIrcMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: irc
+                type: topic
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractNotificationMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: notification
+                type: topic
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractOnesignalMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: onesignal
+                type: topic
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractMysqlMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: mysql
+                type: topic
+                durable: false
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractBucketMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: bucket
+                type: topic
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractPaymentMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: payment
+                type: topic
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractUserMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: user
+                type: topic
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractAnalyticsMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: analytics
+                type: topic
+
+        !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractEventDispatcherMessage::PRODUCER:
+            connection: default
+            exchange_options:
+                name: event_dispatcher
+                type: topic
+
+    consumers:
+        queue_irc_notify:
+            connection: default
+            exchange_options:
+                name: irc
+                type: topic
+            queue_options:
+                name: backend/messagebroker/irc/notification
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractIrcMessage::QUEUE_NOTIFY
+            callback: 'GamePoint\Application\MessageHandler\Topic\Irc\IrcMessageHandler'
+
+        queue_notification_publish_send:
+            connection: default
+            exchange_options:
+                name: notification
+                type: topic
+            queue_options:
+                name: backend/notification/eventprocessor
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractNotificationMessage::QUEUE_PUBLISH_SEND
+            callback: 'GamePoint\Application\MessageHandler\Topic\Notification\NotificationMessageHandler'
+
+        queue_onesignal_publish_send:
+            connection: default
+            exchange_options:
+                name: onesignal
+                type: topic
+            queue_options:
+                name: backend/onesignal/eventprocessor
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractOnesignalMessage::QUEUE_PUBLISH_SEND
+            callback: 'GamePoint\Application\MessageHandler\Topic\Onesignal\OnesignalMessageHandler'
+
+        queue_mysql_doquery:
+            connection: default
+            exchange_options:
+                name: mysql
+                type: topic
+                durable: false
+            queue_options:
+                name: backend/messagebroker/mysql/mysqlusage
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractMysqlMessage::QUEUE_DOQUERY
+                durable: false
+            callback: 'GamePoint\Application\MessageHandler\Topic\Mysql\MysqlMessageHandler'
+
+        queue_bucket_remove:
+            connection: default
+            exchange_options:
+                name: bucket
+                type: topic
+            queue_options:
+                name: backend/bucketing/segments/nonpayer/messagebroker/listener
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractBucketMessage::QUEUE_REMOVE
+            callback: 'GamePoint\Application\MessageHandler\Topic\Bucket\BucketMessageHandler'
+
+        queue_payment:
+            connection: default
+            exchange_options:
+                name: payment
+                type: topic
+            queue_options:
+                name: backend/messagebroker/payment/paymentsummary
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractPaymentMessage::QUEUE_PAYMENT
+            callback: 'GamePoint\Application\MessageHandler\Topic\Payment\PaymentHandler'
+
+        queue_payment_favpricepoint:
+            connection: default
+            exchange_options:
+                name: payment
+                type: topic
+            queue_options:
+                name: backend/payment/favpricepointlistener
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractPaymentMessage::QUEUE_PAYMENT_COMPLETED
+            callback: 'GamePoint\Application\MessageHandler\Topic\Payment\PaymentFavPricePointHandler'
+
+        queue_payment_statistics_status_update:
+            connection: default
+            exchange_options:
+                name: payment
+                type: topic
+            queue_options:
+                name: backend/payment/statistics/listener
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractPaymentMessage::QUEUE_PAYMENT_STATUS_UPDATE
+            callback: 'GamePoint\Application\MessageHandler\Topic\Payment\PaymentStatisticsStatusUpdateHandler'
+
+        queue_payment_statistics_status_update_authorised:
+            connection: default
+            exchange_options:
+                name: payment
+                type: topic
+            queue_options:
+                name: backend/payment/statistics/listener
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractPaymentMessage::QUEUE_PAYMENT_STATUS_UPDATE_AUTHORISED
+            callback: 'GamePoint\Application\MessageHandler\Topic\Payment\PaymentStatisticsStatusUpdateAuthorizedHandler'
+
+        queue_payment_nonpayer_status_update_authorised:
+            connection: default
+            exchange_options:
+                name: payment
+                type: topic
+            queue_options:
+                name: backend/bucketing/segments/nonpayer/messagebroker/listener
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractPaymentMessage::QUEUE_PAYMENT_STATUS_UPDATE_AUTHORISED
+            callback: 'GamePoint\Application\MessageHandler\Topic\Payment\PaymentNonPayerStatusUpdateAuthorizedHandler'
+
+        queue_user_customerlevel:
+            connection: default
+            exchange_options:
+                name: user
+                type: topic
+            queue_options:
+                name: backend/bucketing/eventprocessor
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractUserMessage::QUEUE_CUSTOMERLEVEL
+            callback: 'GamePoint\Application\MessageHandler\Topic\User\UserCustomerLevelHandler'
+
+        queue_user_processed_session_stop:
+            connection: default
+            exchange_options:
+                name: user
+                type: topic
+            queue_options:
+                name: backend/bucketing/fillerscript/vcbalance/coin
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractUserMessage::QUEUE_PROCESSED_SESSION_STOP
+            callback: 'GamePoint\Application\MessageHandler\Topic\User\UserProcessedSessionStopHandler'
+
+        queue_user_activity_hourly:
+            connection: default
+            exchange_options:
+                name: user
+                type: topic
+            queue_options:
+                name: backend/bucketing/fillerscript/vcbalance/coin
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractUserMessage::QUEUE_ACTIVITY_HOURLY
+            callback: 'GamePoint\Application\MessageHandler\Topic\User\UserActivityHourlyHandler'
+
+        queue_user_web_analytics:
+            connection: default
+            exchange_options:
+                name: user
+                type: topic
+            queue_options:
+                name: backend/analytics/event/web/listener
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractUserMessage::QUEUE_WEB_ANALYTICS
+            callback: 'GamePoint\Application\MessageHandler\Topic\User\UserWebAnalyticsHandler'
+
+        queue_user_game_favstake:
+            connection: default
+            exchange_options:
+                name: user
+                type: topic
+            queue_options:
+                name: backend/bucketing/eventprocessor
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractUserMessage::QUEUE_GAME_FAVOURITESTAKE
+            callback: 'GamePoint\Application\MessageHandler\Topic\User\UserGameFavouriteStakeHandler'
+
+        queue_user_session_shoveler:
+            connection: session_shoveler
+            exchange_options:
+                name: user
+                type: topic
+            queue_options:
+                name: backend/analytics/session/shoveler
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractUserMessage::QUEUE_SESSION
+            callback: 'GamePoint\Application\MessageHandler\Topic\User\UserSessionShovelerHandler'
+
+        queue_analytics_redshift_insert:
+            connection: default
+            exchange_options:
+                name: analytics
+                type: topic
+            queue_options:
+                name: backend/analytics/redshift/insertlistener
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractAnalyticsMessage::QUEUE_REDSHIFT_INSERT
+            callback: 'GamePoint\Application\MessageHandler\Topic\Analytics\AnalyticsRedshiftInsertHandler'
+
+        queue_analytics_redshift_insert_failure:
+            connection: default
+            exchange_options:
+                name: analytics
+                type: topic
+            queue_options:
+                name: analytics.redshift.insert.failure
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractAnalyticsMessage::QUEUE_REDSHIFT_INSERT_FAILURE
+            callback: 'GamePoint\Application\MessageHandler\Topic\Analytics\AnalyticsRedshiftInsertFailureHandler'
+
+        queue_analytics_user_game_failure:
+            connection: default
+            exchange_options:
+                name: analytics
+                type: topic
+            queue_options:
+                name: analytics.user.game.failure
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractAnalyticsMessage::QUEUE_USER_GAME_FAILURE
+            callback: 'GamePoint\Application\MessageHandler\Topic\Analytics\AnalyticsUserGameFailureHandler'
+
+        queue_analytics_user_web_failure:
+            connection: default
+            exchange_options:
+                name: analytics
+                type: topic
+            queue_options:
+                name: analytics.user.web.failure
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractAnalyticsMessage::QUEUE_USER_WEB_FAILURE
+            callback: 'GamePoint\Application\MessageHandler\Topic\Analytics\AnalyticsUserWebFailureHandler'
+
+        queue_analytics_event_awsmobileanalytics:
+            connection: default
+            exchange_options:
+                name: analytics
+                type: topic
+            queue_options:
+                name: backend/analytics/awsmobileanalytics/listener
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractAnalyticsMessage::QUEUE_EVENT_AWSMOBILEANALYTICS
+            callback: 'GamePoint\Application\MessageHandler\Topic\Analytics\AnalyticsEventAwsMobileAnalyticsHandler'
+
+        queue_event_dispatcher_dispatch:
+            connection: default
+            exchange_options:
+                name: event_dispatcher
+                type: topic
+            queue_options:
+                name: event_dispatcher.dispatch
+                routing_keys:
+                    - !php/const \GamePoint\Application\Message\Abstracts\Topic\AbstractEventDispatcherMessage::QUEUE_DISPATCH
+            callback: 'GamePoint\Application\MessageHandler\Topic\EventDispatcher\EventDispatcherHandler'
